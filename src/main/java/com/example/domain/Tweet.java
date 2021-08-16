@@ -25,6 +25,6 @@ public class Tweet {
     private String message;
 
     @DynamoDBAttribute(attributeName = "dateCreated")
-    private String dateCreated;
+    private long dateCreated;
 
 }
