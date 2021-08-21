@@ -15,16 +15,12 @@ import lombok.NoArgsConstructor;
 @DynamoDBTable(tableName = "user")
 public class Tweet {
 
-    @DynamoDBHashKey(attributeName = "id")
-    private String id;
-
-    @DynamoDBAttribute(attributeName = "userName")
-    private String name;
-
-    @DynamoDBAttribute(attributeName = "message")
-    private String message;
+    @DynamoDBHashKey(attributeName = "user")
+    private String user;
 
     @DynamoDBAttribute(attributeName = "dateCreated")
     private long dateCreated;
 
+    @DynamoDBAttribute(attributeName = "message")
+    private String message;
 }

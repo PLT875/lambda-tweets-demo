@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
-import java.util.UUID;
 
 @Getter
 @AllArgsConstructor
@@ -16,14 +15,14 @@ public class CreateTweetRequest {
 
     private String message;
 
-    public static Tweet toTweet(CreateTweetRequest request) {
+    public static Tweet toTweet(CreateTweetRequest request, String user) {
         long dateCreated = LocalDateTime
                 .now(ZoneOffset.UTC)
                 .atZone(ZoneOffset.UTC)
                 .toEpochSecond();
 
         return Tweet.builder()
-                .id(UUID.randomUUID().toString())
+                .user(user)
                 .message(request.message)
                 .dateCreated(dateCreated)
                 .build();

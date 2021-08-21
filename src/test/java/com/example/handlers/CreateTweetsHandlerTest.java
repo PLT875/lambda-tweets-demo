@@ -22,6 +22,9 @@ public class CreateTweetsHandlerTest {
     private TweetService mockTweetService;
 
     @Mock
+    private HandlerUtil mockHandlerUtil;
+
+    @Mock
     private APIGatewayProxyRequestEvent mockRequestEvent;
 
     @Mock
@@ -30,12 +33,13 @@ public class CreateTweetsHandlerTest {
     @BeforeEach
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        createTweetsHandler = new CreateTweetsHandler(mockTweetService);
+        createTweetsHandler = new CreateTweetsHandler(mockTweetService, mockHandlerUtil);
     }
 
     @Test
     public void shouldReturn204WhenSuccessfullyAddTweet() {
         when(mockRequestEvent.getBody()).thenReturn("{\"message\":\"some message\"}");
+        when(mockHandlerUtil.retrieveCognitoId(mockRequestEvent)).thenReturn("user0");
         APIGatewayProxyResponseEvent response = createTweetsHandler.handleRequest(mockRequestEvent, context);
         verify(mockTweetService).addTweet(any(Tweet.class));
     }
